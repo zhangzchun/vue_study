@@ -1,0 +1,23 @@
+{
+  "name": "vue_study",
+  "version": "1.0.0",
+  "description": "vue学习",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangzchwn/vue_study.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhangzchwn/vue_study/issues"
+  },
+  "homepage": "https://github.com/zhangzchwn/vue_study#readme",
+  "dependencies": {
+    "vue": "^2.6.11"
+  }
+}

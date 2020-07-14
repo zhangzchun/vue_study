@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form</title>
+</head>
+<body>
+<div id="app">
+    <br>
+    <span>单行文本</span>
+    <form action="">
+        <input v-model="message" placeholder="edit me">
+        <p>Message is: {{ message }}</p>
+    </form>
+
+
+    <br>
+    <span>多行文本</span>
+    <form action="">
+        <span>Multiline message is:</span>
+        <p style="white-space: pre-line;">{{ message }}</p>
+        <br>
+        <textarea v-model="message" placeholder="add multiple lines"></textarea>
+    </form>
+
+
+    <br>
+    <span>单个复选框，绑定到布尔值：</span>
+    <form action="">
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label>
+    </form>
+
+
+
+    <br>
+    <span>多个复选框，绑定到同一个数组：</span>
+    <form action="">
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+    </form>
+</div>
+
+<br>
+<span></span>
+<div id="example-4">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+</div>
+
+<br>
+<span></span>
+
+<div id="example-5">
+    <select v-model="selected">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+</div>
+<!--
+如果 v-model 表达式的初始值未能匹配任何选项，<select> 元素将被渲染为“未选中”状态。
+在 iOS 中，这会使用户无法选择第一个选项。
+因为这样的情况下，iOS 不会触发 change 事件。
+因此，更推荐像上面这样提供一个值为空的禁用选项。-->
+<div id="example-6">
+    <select v-model="selected" multiple style="width: 50px;">
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selected }}</span>
+</div>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        // element
+        el:'#app',
+        data:{
+            message:'hello word',
+            content:'vue is mvvm',
+            checked: "",
+            checkedNames: []
+        }
+    });
+
+    var radioEx = new Vue({
+        el: '#example-4',
+        data: {
+            picked: ''
+        }
+    });
+
+    var selectEx = new Vue({
+        el: '#example-5',
+        data: {
+            selected: ''
+        }
+    });
+
+    var mulSelect = new Vue({
+        el: '#example-6',
+        data: {
+            selected: []
+        }
+    })
+</script>
+</body>
+</html>

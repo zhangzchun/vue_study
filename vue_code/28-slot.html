@@ -2,16 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>vue</title>
+    <title>slot</title>
 </head>
 <body>
 <div id="app">
-    {{ message}}
-    {{ content}}
+    <alert-box>
+        Something bad happened.
+    </alert-box>
 </div>
 
 <script src="../node_modules/vue/dist/vue.js"></script>
 <script>
+    Vue.component('alert-box', {
+        template: `
+    <div class="demo-alert-box">
+      <strong>Error!</strong>
+      <slot></slot>
+    </div>
+  `
+    });
+
     var app = new Vue({
         // element
         el:'#app',

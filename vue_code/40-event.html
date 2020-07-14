@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event</title>
+</head>
+<body>
+<div>
+    事件名
+    不同于组件和 prop，事件名不存在任何自动化的大小写转换。而是触发的事件名需要完全匹配监听这个事件所用的名称。举个例子，如果触发一个 camelCase 名字的事件：
+
+    this.$emit('myEvent')
+    则监听这个名字的 kebab-case 版本是不会有任何效果的：
+
+    <!-- 没有效果 -->
+    <!--<my-component v-on:my-event="doSomething"></my-component>-->
+    <!--始终使用 kebab-case 的事件名。-->
+
+</div>
+</body>
+</html>

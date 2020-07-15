@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot</title>
+</head>
+<body>
+<div id="app">
+    <alert-box>
+        Something bad happened.
+    </alert-box>
+</div>
+
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('alert-box', {
+        template: `
+    <div class="demo-alert-box">
+      <strong>Error!</strong>
+      <slot></slot>
+    </div>
+  `
+    });
+
+    var app = new Vue({
+        // element
+        el:'#app',
+        data:{
+            message:'hello word',
+            content:'vue is mvvm'
+        }
+    })
+</script>
+</body>
+</html>

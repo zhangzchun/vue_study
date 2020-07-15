@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<div id="app">
+    <br>
+    <span>
+        你可能有很多次想要在一个组件的根元素上直接监听一个原生事件。这时，你可以使用 v-on 的 .native 修饰符：<br>
+        &lt base-input v-on:focus.native="onFocus" &gt &lt /base-input &gt
+    </span>
+</div>
+
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('base-input', {
+        inheritAttrs: false,
+        props: ['label', 'value'],
+        computed: {
+            inputListeners: function () {
+                var vm = this
+                // `Object.assign` 将所有的对象合并为一个新对象
+                return Object.assign({},
+                    // 我们从父级添加所有的监听器
+                    this.$listeners,
+                    // 然后我们添加自定义监听器，
+                    // 或覆写一些监听器的行为
+                    {
+                        // 这里确保组件配合 `v-model` 的工作
+                        input: function (event) {
+                            vm.$emit('input', event.target.value)
+                        }
+                    }
+                )
+            }
+        },
+        template: `
+    <label>
+      {{ label }}
+      <input
+        v-bind="$attrs"
+        v-bind:value="value"
+        v-on="inputListeners"
+      >
+    </label>
+  `
+    });
+
+    var app = new Vue({
+        // element
+        el:'#app',
+        data:{
+            message:'hello word',
+            content:'vue is mvvm'
+        }
+    })
+</script>
+</body>
+</html>

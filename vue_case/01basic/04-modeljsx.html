@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .divcss {
+            width: 300px;
+            height: 100px;
+            border: solid 2px black;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app-1">
+    <div>
+        <ul>
+            <div v-for="g in goods">
+                <li v-if="g.price>3000">
+                    <h3>{{g.name}}</h3>
+                    <h5>{{g.price}}</h5>
+                </li>
+            </div>
+        </ul>
+
+    </div>
+
+    <button v-on:click="changeMessage">ajax....</button>
+</div>
+
+<div class="container" id="app-2">
+    <div>
+        <ul>
+            <div v-for="g in goods">
+                <li v-if="g.price>3000">
+                    <h3>{{g.name}}</h3>
+                    <h5>{{g.price}}</h5>
+                </li>
+            </div>
+        </ul>
+    </div>
+    <!--v-on: ==>>@    v-bind:==>>:-->
+    <button @click="changeMessage" :name="message">ajax....</button>
+
+    <!--双向绑定一定是value;表单元素-->
+    <p>v-model 一定是表单元素</p>
+    <h1>{{message}}</h1>
+    <input type="text" v-model="message">
+    <br/>
+    <select name="sel" id="mysel" v-model="city">
+        <option value="suzhou">suzhou</option>
+        <option value="shanghai">shanghai</option>
+        <option value="nanjing">nanjing</option>
+        <option value="guangzhou">guangzhou</option>
+    </select>
+    <h1>{{city}}</h1>
+</div>
+
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    var app1 = new Vue({
+        //element
+        el: '#app-1',
+        data: {
+            goods: null
+        },
+        methods: {
+            changeMessage: function () {
+                this.goods = [
+                    {name: "iphone", price: 3000},
+                    {name: "oppo", price: 4000},
+                    {name: "sasung", price: 5000},
+                ]
+            }
+        }
+    });
+
+    var app2 = new Vue({
+        //element
+        el: '#app-2',
+        data: {
+            goods: null,
+            message: "init",
+            city: ''
+        },
+
+        methods: {
+            changeMessage: function () {
+                this.goods = [
+                    {name: "iphone", price: 3000},
+                    {name: "oppo", price: 4000},
+                    {name: "sasung", price: 5000},
+                ]
+            }
+        }
+    })
+</script>
+</body>
+</html>

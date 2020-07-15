@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prop</title>
+</head>
+<body>
+<!--
+<h3>{{ title }}</h3>
+<div v-html="content"></div>
+然而如果你在模板中尝试这样写，Vue 会显示一个错误，并解释道 every component must have a single root element (每个组件必须只有一个根元素)。你可以将模板的内容包裹在一个父元素内，来修复这个问题，例如：
+
+<div class="blog-post">
+    <h3>{{ title }}</h3>
+    <div v-html="content"></div>
+</div>
+-->
+
+<!--
+<blog-post
+        v-for="post in posts"
+        v-bind:key="post.id"
+        v-bind:title="post.title"
+        v-bind:content="post.content"
+        v-bind:publishedAt="post.publishedAt"
+        v-bind:comments="post.comments"
+></blog-post>
+-->
+
+<div id="blog-post-demo-1">
+    <blog-post
+            v-for="post in posts"
+            v-bind:key="post.id"
+            v-bind:post="post"
+    ></blog-post>
+</div>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('blog-post', {
+        props: ['post'],
+        template: `
+    <div class="blog-post">
+      <h3>{{ post.title }}</h3>
+      <div v-html="post.content"></div>
+    </div>
+  `
+    });
+
+    var blogdemo2 =new Vue({
+        el: '#blog-post-demo-1',
+        data: {
+            posts: [
+                {
+                    id: 1,
+                    title: 'My journey with Vue',
+                    content:'contentcontentcontentcontent',
+                    publishedAt:'publishedAtpublishedAtpublishedAtpublishedAt',
+                    comments:'commentscommentscommentscommentscomments',
+                },
+                {
+                    id: 2,
+                    title: 'Blogging with Vue',
+                    content:'contentcontentcontentcontent',
+                    publishedAt:'publishedAtpublishedAtpublishedAtpublishedAt',
+                    comments:'commentscommentscommentscommentscomments',
+                },
+                {
+                    id: 3,
+                    title: 'Why Vue is so fun',
+                    content:'Why Vue is so fun contentcontent',
+                    publishedAt:'Why Vue is so fun publishedAtpublishedAt',
+                    comments:'Why Vue is so fun commentscomments',
+                }
+            ]
+        }
+    })
+</script>
+
+</body>
+</html>

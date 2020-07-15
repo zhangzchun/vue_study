@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class style</title>
+</head>
+<body>
+<!-- class -->
+<!--对象语法-->
+<div id="class">
+    <div v-bind:class="{ active: isActive }"></div>
+
+    <div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+    <!--绑定的数据对象不必内联定义在模板里：-->
+    <div v-bind:class="classObject"></div>
+
+</div>
+<div id="class-2">
+    <!--我们也可以在这里绑定一个返回对象的计算属性。这是一个常用且强大的模式：-->
+    <div v-bind:class="classObject"></div>
+</div>
+
+<span>华丽丽的分割线 ======================== </span>
+
+<!--2 数组语法-->
+<div id="class-3">
+    把一个数组传给 v-bind:class，以应用一个 class 列表：
+    <div v-bind:class="[activeClass, errorClass]"></div>
+    <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+    <!-- 当有多个条件 class 时这样写繁琐。所以在数组语法中也可以使用对象语法-->
+    <div v-bind:class="[{ active: isActive }, errorClass]"></div>
+
+</div>
+
+<!-- 3 组件 -->
+<div id="class-4">
+    <my-component class="baz boo"></my-component>
+    <!--<p class="foo bar baz boo">Hi</p>-->
+    <!--数据绑定 class 同样适用：-->
+    <my-component v-bind:class="{ active: isActive }"></my-component>
+    <!--<p class="foo bar active"> Hi </p>-->
+</div>
+
+<!-- style -->
+<div id="class-5">
+    <!-- v-bind:style 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。
+    CSS property 名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用引号括起来) 来命名：-->
+    <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+    <!--直接绑定到一个样式对象通常更好，这会让模板更清晰：-->
+    <div v-bind:style="styleObject"></div>
+    <!-- 数组语法 -->
+    <div v-bind:style="[baseStyles, overridingStyles]"></div>
+
+</div>
+<!--自动添加前缀-->
+<!--多重值-->
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+
+    var classVm = new Vue({
+        el: '#class',
+        data: {
+            isActive: true,
+            hasError: false,
+            classObject: {
+                active: true,
+                'text-danger': false
+            }
+        },
+
+    });
+    /*
+    * 当 isActive 或者 hasError 变化时，class 列表将相应地更新。
+    * 例如，如果 hasError 的值为 true，
+    * class 列表将变为 "static active text-danger"*/
+
+    var classVm2 = new Vue({
+        el:'#class-2',
+        data: {
+            isActive: true,
+            error: null
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    });
+
+    var classVm3 = new Vue({
+        el:'#class-3',
+        data: {
+            isActive: true,
+            activeClass: 'active',
+            errorClass: 'text-danger',
+        },
+        computed: {
+
+        }
+    });
+    var classVm4 = new Vue({
+        el:'#class-4',
+        data: {
+            isActive: true,
+            activeClass: 'active',
+            errorClass: 'text-danger',
+        },
+        computed: {
+
+        }
+    });
+    classVm4.component('my-component', {
+        template: '<p class="foo bar">Hi</p>'
+    });
+
+    var classVm5 = new Vue({
+        el:'#class-5',
+        data: {
+            activeColor: 'red',
+            fontSize: 30,
+            styleObject: {
+                color: 'red',
+                fontSize: '13px'
+            },
+            baseStyles: {
+                color: 'red',
+                fontSize: '13px'
+            },
+            overridingStyles: {
+                color: 'red',
+                fontSize: '13px'
+            },
+        },
+        computed: {
+
+        }
+    });
+
+
+</script>
+</body>
+</html>

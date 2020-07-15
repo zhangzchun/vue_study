@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<br>
+<span>  使用事件抛出一个值 </span>
+<div id="blog-posts-events-demo">
+    <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post
+                v-for="post in posts"
+                v-bind:key="post.id"
+                v-bind:post="post"
+                v-on:enlarge-text="postFontSize += $event"
+        ></blog-post>
+    </div>
+</div>
+
+<br>
+<span> 事件处理函数是一个方法 </span>
+<div id="blog-posts-events-demo2">
+    <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post
+                v-for="post in posts"
+                v-bind:key="post.id"
+                v-bind:post="post"
+                v-on:enlarge-text="onEnlargeText"
+        ></blog-post>
+    </div>
+</div>
+
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('blog-post', {
+        props: ['post'],
+        template: `
+    <div class="blog-post">
+      <h3>{{ post.title }}</h3>
+      <button v-on:click="$emit('enlarge-text', 0.1)">
+  Enlarge text
+</button>
+      <div v-html="post.content"></div>
+    </div>
+  `
+    });
+
+    var app1 = new Vue({
+        el: '#blog-posts-events-demo',
+        data: {
+            posts: [
+                {
+                    id: 1,
+                    title: 'My journey with Vue',
+                    content:'contentcontentcontentcontent',
+                    publishedAt:'publishedAtpublishedAtpublishedAtpublishedAt',
+                    comments:'commentscommentscommentscommentscomments',
+                },
+                {
+                    id: 2,
+                    title: 'Blogging with Vue',
+                    content:'contentcontentcontentcontent',
+                    publishedAt:'publishedAtpublishedAtpublishedAtpublishedAt',
+                    comments:'commentscommentscommentscommentscomments',
+                },
+                {
+                    id: 3,
+                    title: 'Why Vue is so fun',
+                    content:'Why Vue is so fun contentcontent',
+                    publishedAt:'Why Vue is so fun publishedAtpublishedAt',
+                    comments:'Why Vue is so fun commentscomments',
+                }
+            ],
+            postFontSize: 1
+        }
+    });
+    var app2 = new Vue({
+        el: '#blog-posts-events-demo2',
+        data: {
+            posts: [
+                {
+                    id: 1,
+                    title: 'My journey with Vue',
+                    content:'contentcontentcontentcontent',
+                    publishedAt:'publishedAtpublishedAtpublishedAtpublishedAt',
+                    comments:'commentscommentscommentscommentscomments',
+                },
+                {
+                    id: 2,
+                    title: 'Blogging with Vue',
+                    content:'contentcontentcontentcontent',
+                    publishedAt:'publishedAtpublishedAtpublishedAtpublishedAt',
+                    comments:'commentscommentscommentscommentscomments',
+                },
+                {
+                    id: 3,
+                    title: 'Why Vue is so fun',
+                    content:'Why Vue is so fun contentcontent',
+                    publishedAt:'Why Vue is so fun publishedAtpublishedAt',
+                    comments:'Why Vue is so fun commentscomments',
+                }
+            ],
+            postFontSize: 1
+        },
+        methods: {
+            onEnlargeText: function (enlargeAmount) {
+                this.postFontSize += enlargeAmount
+            }
+        }
+    })
+</script>
+</body>
+</html>

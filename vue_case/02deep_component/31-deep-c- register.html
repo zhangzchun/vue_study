@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+</head>
+<body>
+<br>
+<span> 组件名 </span>
+<span>
+   在注册一个组件的时候，我们始终需要给它一个名字。比如在全局注册的时候我们已经看到了：
+Vue.component('my-component-name', { /* ... */ })
+该组件名就是 Vue.component 的第一个参数。
+</span>
+<span>
+    <!--
+    定义组件名的方式有两种：
+
+使用 kebab-case
+Vue.component('my-component-name', { /* ... */ })
+当使用 kebab-case (短横线分隔命名) 定义一个组件时，你也必须在引用这个自定义元素时使用 kebab-case，例如 <my-component-name>。
+
+使用 PascalCase
+Vue.component('MyComponentName', { /* ... */ })
+当使用 PascalCase (首字母大写命名) 定义一个组件时，你在引用这个自定义元素时两种命名法都可以使用。也就是说 <my-component-name> 和 <MyComponentName> 都是可接受的。注意，尽管如此，直接在 DOM (即非字符串的模板) 中使用时只有 kebab-case 是有效的。
+    -->
+</span>
+<br>
+<span> 全局注册 </span>
+<div id="app">
+    <component-a></component-a>
+    <component-b></component-b>
+    <component-c></component-c>
+</div>
+
+<br>
+<span> 局部注册 </span>
+<div id="app-2">
+
+</div>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('component-a', { /* ... */ });
+    Vue.component('component-b', { /* ... */ });
+    Vue.component('component-c', { /* ... */ });
+    var app1 = new Vue({ el: '#app' });
+
+
+    var ComponentA = { /* ... */ };
+    var ComponentB = { /* ... */ };
+    var ComponentC = { /* ... */ };
+    new Vue({
+        el: '#app-2',
+        components: {
+            'component-a': ComponentA,
+            'component-b': ComponentB
+        }
+    })
+
+</script>
+</body>
+</html>
